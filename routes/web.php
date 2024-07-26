@@ -4,10 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Admin routes
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['prevent-back-history'])->group(function () {
@@ -20,6 +16,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::view('/home', 'admin.pages.home')->name('home');
         Route::post('/logout_handler', [AdminController::class, 'logoutHandler'])->name('logout_handler');
         Route::get('/profile', [AdminController::class, 'profileView'])->name('profile');
+        
     });
 });
 
@@ -32,37 +29,4 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('/home', [ClientController::class, 'home'])->name('home');
     });
 });
-
-
-// use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\AdminController;
-
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-// // Admin routes
-// Route::prefix('admin')->name('admin.')->group(function () {
-    
-//     Route::middleware(['PreventBackHistory'])->group(function () {
-//         Route::view('/login', 'admin.pages.auth.login')->name('login');
-//         Route::post('/login_handler', [AdminController::class, 'loginHandler'])->name('login_handler');
-//     });
-
-//     Route::middleware(['auth:admin', 'PreventBackHistory'])->group(function () {
-//         Route::view('/home', 'admin.pages.home')->name('home');
-//         Route::post('/logout_handler', [AdminController::class, 'logoutHandler'])->name('logout_handler');
-//         // Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
-//     });
-// });
-
-// // Client routes
-// Route::prefix('client')->name('client.')->group(function () {
-//     Route::get('/login', [ClientController::class, 'showLoginForm'])->name('login');
-//     Route::post('/login', [ClientController::class, 'login']);
-//     Route::middleware('auth:client')->group(function () {
-//         Route::get('/home', [ClientController::class, 'home'])->name('home');
-//     });
-// });
 

@@ -49,6 +49,11 @@
                 ></span>
             </div>
         </div>
+        @error('password')
+        <div class="d-block text-danger" style="margin-top: -25px; margin-bottom: 15px;">
+            {{ $message }}
+        </div>
+        @enderror
         <div class="row pb-30">
             <div class="col-6">
                 <div class="custom-control custom-checkbox">

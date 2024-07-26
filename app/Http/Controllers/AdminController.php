@@ -10,13 +10,22 @@ class AdminController extends Controller
 {
     public function loginHandler(Request $request){
 
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:5|max:45'
+        ],[
+            'email.required' => 'Email is required',
+            'password.required' => 'Password is required'
+        ]);
+
         $credentials = $request->only('email', 'password');
 
         if(Auth::guard('admin')->attempt($credentials)) {
             return redirect()->intended(route('admin.home'));
         }
 
-        return redirect()->back()->withErrors(['email' => 'Invalid credentials']);
+        session()->flash('fail', 'Incorrect Email or Password');
+        return redirect()->route('admin.login');
     }
 
     public function logoutHandler(Request $request) {
