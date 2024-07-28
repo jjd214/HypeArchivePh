@@ -44,7 +44,7 @@
 		/>
 		<link rel="stylesheet" type="text/css" href="/back/vendors/styles/style.css" />
 		<link rel="stylesheet" href="/public/extra-assets/ijaboCropTool-master/ijaboCropTool.min.css">
-
+		@livewireStyles
         @stack('stylesheets')
 	</head>
 	<body>
@@ -206,42 +206,8 @@
 						</div>
 					</div>
 				</div>
-				@if (Auth::guard('admin')->check())
-				<div class="user-info-dropdown">
-					<div class="dropdown">
-						<a
-							class="dropdown-toggle"
-							href="#"
-							role="button"
-							data-toggle="dropdown"
-						>
-							<span class="user-icon">
-								<img src="/back/vendors/images/photo1.jpg" alt="" />
-							</span>
-							<span class="user-name">Ross C. Lopez</span>
-						</a>
-						<div
-							class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-						>
-							<a class="dropdown-item" href="{{ route('admin.profile') }}"
-								><i class="dw dw-user1"></i> Profile</a
-							>
-							<a class="dropdown-item" href="profile.html"
-								><i class="dw dw-settings2"></i> Setting</a
-							>
-							<a class="dropdown-item" href="faq.html"
-								><i class="dw dw-help"></i> Help</a
-							>
-							<a class="dropdown-item" href="login.html"
-							   onclick="event.preventDefault(); document.getElementById('adminLogoutForm').submit();"
-								><i class="dw dw-logout"></i> Log Out</a
-							>
-
-							<form action="{{ route('admin.logout_handler')}}" id="adminLogoutForm" method="POST">@csrf</form>
-						</div>
-					</div>
-				</div>
-				@endif
+				
+				@livewire('admin-header-profile-info')
 				
 				<div class="github-link">
 					<a href="https://github.com/dropways/deskapp" target="_blank"
@@ -437,6 +403,7 @@
 			</div>
 			<div class="menu-block customscroll">
 				<div class="sidebar-menu">
+
 					<ul id="accordion-menu">
 
 						@if (Route::is('admin.*'))
@@ -462,7 +429,6 @@
 						<li>
 							<a
 								href="{{ route('admin.profile') }}"
-								target="_self"
 								class="dropdown-toggle no-arrow"
 							>
 								<span class="micon fa fa-user"></span>
@@ -545,6 +511,7 @@
 				else { return false; }
 			})
 		</script>
+		@livewireScripts
         @stack('scripts')
 	</body>
 </html>
